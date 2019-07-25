@@ -1,4 +1,4 @@
-# [FreeCodeCamp](https://learn.freecodecamp.org/front-end-libraries/front-end-libraries-projects): Projects for the Front End Libraries certification
+# FreeCodeCamp: Projects for the [Front End Libraries certification](https://learn.freecodecamp.org/front-end-libraries/front-end-libraries-projects)
 
 1. **[Random Quote Machine](https://github.com/lezojeda/freecodecamp-front-end-libraries/blob/master/quote-machine/README.md)**
 * HTML
