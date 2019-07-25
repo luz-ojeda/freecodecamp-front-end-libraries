@@ -6,7 +6,7 @@
 * Javascript
   * React
 
-1. **[Markdown Previewer](https://github.com/lezojeda/freecodecamp-front-end-libraries/tree/master/markdown-previewer)**
+2. **[Markdown Previewer](https://github.com/lezojeda/freecodecamp-front-end-libraries/tree/master/markdown-previewer)**
 
 * HTML
 * CSS
