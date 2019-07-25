@@ -94,9 +94,10 @@ body {
 .footer-link {
     color: rgb(0, 0, 0);
     transition: 0.3s;
+    text-decoration:underline;
 }
 .footer-link:hover {
-    color: rgba(93, 88, 82, 0.671);
+    color: rgba(0, 0, 0, 0.836);
     text-decoration: none
 }
 
