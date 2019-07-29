@@ -18,6 +18,7 @@ body {
 #quote-box {
     background-color: #e9decf;
     border-radius: 3%;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
     margin: 0 auto;
     padding: 50px 50px 30px 50px;
     position:absolute;
