@@ -60,8 +60,7 @@ ul, ol {
     padding: 10px 20px 10px 20px;
 }
 
-
-#editor {
+.editor-container textarea {
     background: #dfe2e5;
     border-bottom-left-radius: 2%;
     border-bottom-right-radius: 2%;
@@ -86,22 +85,26 @@ ul, ol {
 
     .container {
         box-shadow: 4px 15px 13px -4px rgba(0,0,0,0.75);
-        width: 50%;
         height: 90vh;
-        
+        width: 50%;
     }
 
     .editor-container {
         margin: 0 20px 0 0;
-        height: 100%;
+    }
+
+    #editor {
+        height: 90vh;
+    }
+
+    .editor-container textarea {
+        min-height: none;
+        height: 90%;
+        resize: vertical;
     }
 
     .previewer-container {
         overflow: scroll;
     }
 
-    #editor {
-        resize: none;
-    }
-    
 }
