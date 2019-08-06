@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {
+    background-color: rgba(0, 0, 0, 0.863);
+}
+
+#drum-machine {
+    border:1px solid red;
+    margin: 0 auto;
+    width: 1000px;
+}
+
+#display {
+    border: 1px solid green;
+    margin: 0 auto;
+    width: 500px;
+
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.drum-pad {
+    border: 1px solid blue;
+    width: 75px;
+}
