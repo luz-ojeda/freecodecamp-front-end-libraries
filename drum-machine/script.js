@@ -1,34 +1,36 @@
-let volume;
+let display = document.getElementById("display")
+let volume = 50;
+let audioElement;
 
 let playDrumPad = function (event) {
     let sound;
     if (event.type ==
-        'click' && event.target.classList.contains('drum-pad')) {
+        'mousedown' && event.target.classList.contains('drum-pad')) {
 
         audioElement = event.target.querySelector("audio")
-
-        sound = new Audio(audioElement.src)
-        sound.play()
-        sound.volume = volume / 100
 
     } else if (['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'].includes(event.key.toUpperCase())) {
 
         audioElement = document.getElementById(event.key.toUpperCase())
-
-        sound = new Audio(audioElement.src)
-        sound.play()
-        sound.volume = volume / 100
+        audioElement.parentNode.classList.add("drum-pad-active")
 
     }
+    sound = new Audio(audioElement.src)
+    sound.play()
+    sound.volume = volume / 100
+    display.innerText = audioElement.parentNode.id.replace("-", " ")
 }
 
-let drumPadColorChange = function(event) {
-
+let buttons = document.getElementById("button-container")
+let removePlayEffect = function () {
+    audioElement.parentNode.classList.remove("drum-pad-active")
 }
 
-document.getElementById("button-container").addEventListener('click', playDrumPad)
+buttons.addEventListener('mousedown', playDrumPad)
 document.addEventListener('keydown', playDrumPad)
-display.addEventListener('mousedown', drumPadColorChange)
+document.addEventListener('keyup', removePlayEffect)
+
+
 
 
 
