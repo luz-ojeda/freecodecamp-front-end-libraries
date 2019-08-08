@@ -4,26 +4,51 @@
     box-sizing: border-box;
   }
 
-body {
-    background-color: rgba(0, 0, 0, 0.863);
+body { 
+    display: flex;
+    justify-content: center;
 }
 
 #drum-machine {
-    border:1px solid red;
-    margin: 0 auto;
-    width: 1000px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      position:absolute;
+      top: 50%;
+      transform: translateY(-50%);
 }
 
 #display {
-    border: 1px solid green;
-    margin: 0 auto;
-    width: 500px;
+    border: 1px solid red;
+}
 
+.button-container { 
+    border: 1px solid red;
     display:flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
+    justify-content: center;
+    width: 250px;
 }
 
 .drum-pad {
-    border: 1px solid blue;
-    width: 75px;
+    border: none;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.349);
+    height: 70px;
+    margin: 5px;
+    width: 70px;
+    border-radius: 5px;
+}
+
+.drum-pad:hover {
+    border: 1px solid black;
+}
+
+.volume-container {
+    border: 1px solid red;
+    width: 45px;
+}
+
+input[type = "range"] {
+    cursor:pointer;
+    height: 100%;
 }

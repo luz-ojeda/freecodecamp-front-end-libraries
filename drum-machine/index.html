@@ -5,42 +5,49 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 
 <body>
+    <script src="  https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
     <div id="drum-machine">
-        <div id="display">
-            <button class="drum-pad">
+        <div id="display"></div>
+        <div id="button-container">
+            <button class="drum-pad" id="left-crash">
                 Q<audio src="assets/left-crash.wav" class="clip" id="Q"></audio>
             </button>
-            <button class="drum-pad">
+            <button class="drum-pad" id="right-crash">
                 W<audio src="assets/right-crash.wav" class="clip" id="W"></audio>
             </button>
-            <!--
-            <button class="drum-pad">
-                E<audio src="" class="clip" id="E"></audio>
+            <button class="drum-pad" id="ride-cymbal">
+                E<audio src="assets/ride.wav" class="clip" id="E"></audio>
             </button>
-            <button class="drum-pad">
-                A<audio src="" class="clip" id="A"></audio>
+            <button class="drum-pad" id="closed-hh">
+                A<audio src="assets/closed_hh.wav" class="clip" id="A"></audio>
             </button>
-            <button class="drum-pad">
-                S<audio src="" class="clip" id="S"></audio>
+            <button class="drum-pad" id="tom1">
+                S<audio src="assets/tom1.wav" class="clip" id="S"></audio>
             </button>
-            <button class="drum-pad">
-                D<audio src="" class="clip" id="D"></audio>
-            </button> -->
-            <button class="drum-pad">
-                Z<audio src="assets/closed_hh.wav" class="clip" id="Z"></audio>
-            </button> 
-            <button class="drum-pad">
-                X<audio src="https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3" class="clip" id="X"></audio>
+            <button class="drum-pad" id="tom2">
+                D<audio src="assets/tom2.wav" class="clip" id="D"></audio>
             </button>
-            <!-- <button class="drum-pad">
-                C<audio src="" class="clip" id="C"></audio>
-            </button> -->
+            <button class="drum-pad" id="snare">
+                Z<audio src="assets/snare.wav" class="clip" id="Z"></audio>
+            </button>
+            <button class="drum-pad" id="bass-drum">
+                X<audio src="assets/bassdrum.wav" class="clip" id="X"></audio>
+            </button>
+            <button class="drum-pad" id="tom3">
+                C<audio src="assets/tom3.wav" class="clip" id="C"></audio>
+            </button>
+            <div class="volume-container">
+                <input type="range" min="0" max="100" value="50" class="slider" id="volume"
+                    onchange="volume = this.value" orient="vertical">
+            </div>
         </div>
+
     </div>
-    <script src = "script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
