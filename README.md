@@ -13,3 +13,10 @@
 * Javascript
   * React
   * [Marked](https://marked.js.org/#/README.md#README.md)
+  
+## 3. **[Drum Machine](https://github.com/lezojeda/freecodecamp-front-end-libraries/tree/master/drum-machine)**
+
+* HTML
+* CSS
+* Javascript
+  * DOM manipulation
