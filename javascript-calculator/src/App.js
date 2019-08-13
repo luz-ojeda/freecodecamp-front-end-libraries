@@ -8,26 +8,32 @@ const Display = (props) => {
 }
 
 const NumPad = (props) => {
+    function handleClick(e) {
+        if(e.target.value == ".") {
+            props.addNewDecimal(e.target.value)
+        } else {
+            props.addNewNumber(e.target.value)
+        }
+    }
     return (
-        <div onClick={props.handleClick}><button value="1">1</button></div>
+        <div onClick={handleClick}>
+            <button value="1">1</button>
+            <button value="0">0</button>
+            <button value=".">.</button>
+        </div>
     )
 }
 
 class Presentational extends React.Component {
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this)
     }
 
-    handleClick(e) {
-        this.props.addNewNumber(e.target.value)
-
-    }
     render() {
         return (
             <div>
-                <Display numbers = {this.props.numbers}/>
-                <NumPad handleClick = {this.handleClick}/>
+                <Display numbers={this.props.numbers} />
+                <NumPad addNewNumber = {this.props.addNewNumber} addNewDecimal = {this.props.addNewDecimal}/>
             </div>
         )
     }
@@ -36,6 +42,7 @@ class Presentational extends React.Component {
 // REDUX
 
 const ADD_NUMBER = 'ADD_NUMBER'
+const ADD_DECIMAL = 'ADD_DECIMAL'
 
 //ACTION CREATOR
 const addNumber = (number) => {
@@ -45,13 +52,25 @@ const addNumber = (number) => {
     }
 }
 
+const addDecimal = () => {
+    return {
+        type: ADD_DECIMAL
+    }
+}
+
 //REDUCER
-const numReducer = (state = [], action) => {
+const numReducer = (state = '0', action) => {
     switch (action.type) {
         case ADD_NUMBER:
-            return [...state, action.number]
+            return state + action.number
+        case ADD_DECIMAL:
+            if((/\./).test(state)) {
+                return state
+            }
+            return state + '.'
         default:
             return state
+        
     }
 }
 
@@ -72,6 +91,9 @@ function mapDispatchToProps(dispatch) {
     return ({
         addNewNumber: function (number) {
             dispatch(addNumber(number))
+        },
+        addNewDecimal: () => {
+            dispatch(addDecimal())
         }
     })
 }
