@@ -18,12 +18,16 @@ let playDrumPad = function (event) {
     sound = new Audio(audioElement.src)
     sound.play()
     sound.volume = volume / 100
-    display.innerText = audioElement.parentNode.id.replace("-", " ")
+    display.innerText = audioElement.parentNode.id.replace("-", " ").toUpperCase()
 }
 
 let buttons = document.getElementById("button-container")
+
 let removePlayEffect = function () {
-    audioElement.parentNode.classList.remove("drum-pad-active")
+    var activeButtons = document.querySelectorAll('.drum-pad-active');
+    activeButtons.forEach(function(el){
+        el.classList.remove('drum-pad-active')
+    })
 }
 
 buttons.addEventListener('mousedown', playDrumPad)
