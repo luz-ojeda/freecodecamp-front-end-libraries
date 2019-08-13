@@ -14,7 +14,7 @@
   * React
   * [Marked](https://marked.js.org/#/README.md#README.md)
   
-  ## 2. **[Drum Machine](https://github.com/lezojeda/freecodecamp-front-end-libraries/tree/master/drum-machine)**
+## 3. **[Drum Machine](https://github.com/lezojeda/freecodecamp-front-end-libraries/tree/master/drum-machine)**
 
 * HTML
 * CSS
