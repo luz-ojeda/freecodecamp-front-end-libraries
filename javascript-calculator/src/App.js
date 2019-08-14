@@ -8,18 +8,34 @@ const Display = (props) => {
 }
 
 const NumPad = (props) => {
-    function handleClick(e) {
-        if(e.target.value == ".") {
+    function handleNumPadClick(e) {
+        if (e.target.value == ".") {
             props.addNewDecimal(e.target.value)
+        } else if (e.target.value == "0") {
+            props.addNewZero(e.target.value)
+        } else if (props.numbers.length == 1){
+            props.addFirstNumber_dispatched(e.target.value)
         } else {
             props.addNewNumber(e.target.value)
         }
     }
     return (
-        <div onClick={handleClick}>
-            <button value="1">1</button>
-            <button value="0">0</button>
-            <button value=".">.</button>
+        <div onClick={handleNumPadClick}>
+            <button id="one" value="1">1</button>
+            <button id="two" value="2">2</button>
+            <button id="zero" value="0">0</button>
+            <button id="decimal" value=".">.</button>
+        </div>
+    )
+}
+
+const Operators = (props) => {
+    function handleOperatorsClick(){
+
+    }
+    return(
+        <div>
+            <button id="add" value="+">+</button>
         </div>
     )
 }
@@ -33,7 +49,8 @@ class Presentational extends React.Component {
         return (
             <div>
                 <Display numbers={this.props.numbers} />
-                <NumPad addNewNumber = {this.props.addNewNumber} addNewDecimal = {this.props.addNewDecimal}/>
+                <NumPad numbers = {this.props.numbers} addFirstNumber_dispatched = {this.props.addFirstNumber_dispatched} addNewNumber={this.props.addNewNumber} addNewDecimal={this.props.addNewDecimal} addNewZero={this.props.addNewZero} />
+                <Operators/>
             </div>
         )
     }
@@ -41,10 +58,19 @@ class Presentational extends React.Component {
 
 // REDUX
 
+const FIRST_NUMBER = 'FIRST_NUMBER'
 const ADD_NUMBER = 'ADD_NUMBER'
 const ADD_DECIMAL = 'ADD_DECIMAL'
+const ADD_ZERO = 'ADD_ZERO'
 
 //ACTION CREATOR
+const addFirstNumber = (number) => {
+    return {
+        type: FIRST_NUMBER,
+        number: number
+    }
+}
+
 const addNumber = (number) => {
     return {
         type: ADD_NUMBER,
@@ -58,19 +84,33 @@ const addDecimal = () => {
     }
 }
 
+const addZero = (number) => {
+    return {
+        type: ADD_ZERO,
+        number: number
+    }
+}
+
 //REDUCER
+var contains_decimal = (/\./)
 const numReducer = (state = '0', action) => {
     switch (action.type) {
+        case FIRST_NUMBER:
+            return eval(parseInt(state + action.number))
         case ADD_NUMBER:
             return state + action.number
         case ADD_DECIMAL:
-            if((/\./).test(state)) {
+            if (contains_decimal.test(state)) {
                 return state
             }
             return state + '.'
+        case ADD_ZERO:
+            if (contains_decimal.test(state) || state != "0") {
+                return state + "0"
+            }
+            return state
         default:
             return state
-        
     }
 }
 
@@ -89,11 +129,17 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return ({
-        addNewNumber: function (number) {
+        addFirstNumber_dispatched: (number) => {
+            dispatch(addFirstNumber(number))
+        },
+        addNewNumber: (number) => {
             dispatch(addNumber(number))
         },
         addNewDecimal: () => {
             dispatch(addDecimal())
+        },
+        addNewZero: (number) => {
+            dispatch(addZero(number))
         }
     })
 }
