@@ -43,7 +43,7 @@ const Operators = (props) => {
     function handleOperatorsClick(e) {
         if (e.target.value == "=") {
             props.evaluateOperation_dispatched(props.operation)
-        } else if(e.target.value == "clear") {
+        } else if (e.target.value == "clear") {
             props.clearResultAndOperation_dispatched()
         } else {
             props.addNewOperator(e.target.value)
@@ -78,8 +78,8 @@ class Presentational extends React.Component {
                     input={this.props.input} addFirstNumber_dispatched={this.props.addFirstNumber_dispatched} addNewNumber={this.props.addNewNumber} addNewDecimal={this.props.addNewDecimal} addNewZero={this.props.addNewZero} />
 
                 <Operators
-                    operation={this.props.operation} 
-                    addNewOperator={this.props.addNewOperator} 
+                    operation={this.props.operation}
+                    addNewOperator={this.props.addNewOperator}
                     evaluateOperation_dispatched={this.props.evaluateOperation_dispatched}
                     result={this.props.result}
                     clearResultAndOperation_dispatched={this.props.clearResultAndOperation_dispatched} />
@@ -156,10 +156,10 @@ const inputReducer = (state = '0', action) => {
         case ADD_NUMBER:
             return state + action.number
         case ADD_DECIMAL:
-            if (contains_decimal.test(state)) {
-                return state
+            if (state[state.length - 1].indexOf('.') == -1) {
+                return state + '.'
             }
-            return state + '.'
+            return state
         case ADD_ZERO:
             if (contains_decimal.test(state) || state != "0") {
                 return state + "0"
@@ -183,9 +183,10 @@ const outputReducer = (state = '', action) => {
         case ADD_NUMBER:
             return state + action.number
         case ADD_DECIMAL:
-            if (contains_decimal.test(state)) {
-                return state
+            if (state[state.length - 1].indexOf('.') == -1) {
+                return state + '.'
             }
+            return state
             return state + '.'
         case ADD_ZERO:
             if (contains_decimal.test(state) || state != "0") {
