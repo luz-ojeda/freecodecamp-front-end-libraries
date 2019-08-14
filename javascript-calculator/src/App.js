@@ -1,6 +1,9 @@
+//COMPONENTS
+
+//DISPLAY
 const Display = (props) => {
     return (
-        <div>
+        <div id="display-container">
             <div id="display" style={{ width: "400px", border: "1px solid red", height: "50px" }}>
                 {props.input}
             </div>
@@ -12,6 +15,7 @@ const Display = (props) => {
 
 }
 
+//NUMPAD
 const NumPad = (props) => {
     function handleNumPadClick(e) {
         if (e.target.value == ".") {
@@ -34,10 +38,13 @@ const NumPad = (props) => {
     )
 }
 
+//OPERATOR PAD
 const Operators = (props) => {
     function handleOperatorsClick(e) {
         if (e.target.value == "=") {
             props.evaluateOperation_dispatched(props.operation)
+        } else if(e.target.value == "clear") {
+            props.clearResultAndOperation_dispatched()
         } else {
             props.addNewOperator(e.target.value)
         }
@@ -46,10 +53,12 @@ const Operators = (props) => {
         <div onClick={handleOperatorsClick} style={{ width: "400px", border: "1px solid blue", height: "50px" }}>
             <button id="add" value="+">+</button>
             <button id="equals" value="=">=</button>
-            <button id="clear" value="AC">AC</button>
+            <button id="clear" value="clear">AC</button>
         </div>
     )
 }
+
+//PRESENTATIONAL COMPONENT
 
 class Presentational extends React.Component {
     constructor(props) {
@@ -62,14 +71,18 @@ class Presentational extends React.Component {
             <div>
                 <Display
                     input={this.props.input}
-                    operation={this.props.operation} 
+                    operation={this.props.operation}
                     result={this.props.result} />
 
                 <NumPad
                     input={this.props.input} addFirstNumber_dispatched={this.props.addFirstNumber_dispatched} addNewNumber={this.props.addNewNumber} addNewDecimal={this.props.addNewDecimal} addNewZero={this.props.addNewZero} />
 
                 <Operators
-                    operation={this.props.operation} addNewOperator={this.props.addNewOperator} evaluateOperation_dispatched={this.props.evaluateOperation_dispatched} result={this.props.result} />
+                    operation={this.props.operation} 
+                    addNewOperator={this.props.addNewOperator} 
+                    evaluateOperation_dispatched={this.props.evaluateOperation_dispatched}
+                    result={this.props.result}
+                    clearResultAndOperation_dispatched={this.props.clearResultAndOperation_dispatched} />
             </div>
         )
     }
@@ -155,8 +168,9 @@ const inputReducer = (state = '0', action) => {
         case ADD_OPERATOR:
             return action.operator
         case EVALUATE:
-        case CLEAR:
             state = ''
+        case CLEAR:
+            state = '0'
         default:
             return state
     }
@@ -183,9 +197,11 @@ const outputReducer = (state = '', action) => {
         case EVALUATE:
             try {
                 return eval(state)
-            } catch(err) {
+            } catch (err) {
                 alert("Please finish the operation or click clear")
             }
+        case CLEAR:
+            state = ''
         default:
             return state
     }
@@ -193,7 +209,7 @@ const outputReducer = (state = '', action) => {
 
 //STORE
 
-const rootReducer = Redux.combineReducers({ input: inputReducer, operation: outputReducer});
+const rootReducer = Redux.combineReducers({ input: inputReducer, operation: outputReducer });
 
 const store = Redux.createStore(rootReducer);
 
@@ -205,7 +221,6 @@ function mapStateToProps(state) {
     return ({
         input: state.input,
         operation: state.operation,
-        result: state.result
     })
 }
 
@@ -228,6 +243,9 @@ function mapDispatchToProps(dispatch) {
         },
         evaluateOperation_dispatched: (operation) => {
             dispatch(evaluateOperation(operation))
+        },
+        clearResultAndOperation_dispatched: () => {
+            dispatch(clearResultAndOperation())
         }
     })
 }
