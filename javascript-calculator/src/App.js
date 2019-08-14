@@ -4,10 +4,10 @@
 const Display = (props) => {
     return (
         <div id="display-container">
-            <div id="display" style={{ width: "400px", border: "1px solid red", height: "50px" }}>
+            <div id="display" style={{ width: "500px", border: "1px solid red", height: "50px" }}>
                 {props.input}
             </div>
-            <div id="display-output" style={{ width: "400px", border: "1px solid green", height: "50px" }}>
+            <div id="display-output" style={{ width: "500px", border: "1px solid green", height: "50px" }}>
                 {props.operation}
             </div>
         </div>
@@ -29,9 +29,16 @@ const NumPad = (props) => {
         }
     }
     return (
-        <div onClick={handleNumPadClick} style={{ width: "400px", border: "1px solid green", height: "50px" }}>
+        <div onClick={handleNumPadClick} style={{ width: "500px", border: "1px solid green", height: "50px" }}>
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
+            <button id="thre" value="3">3</button>
+            <button id="four" value="4">4</button>
+            <button id="five" value="5">5</button>
+            <button id="six" value="6">6</button>
+            <button id="seven" value="7">7</button>
+            <button id="eight" value="8">8</button>
+            <button id="nine" value="9">9</button>
             <button id="zero" value="0">0</button>
             <button id="decimal" value=".">.</button>
         </div>
@@ -50,7 +57,7 @@ const Operators = (props) => {
         }
     }
     return (
-        <div onClick={handleOperatorsClick} style={{ width: "400px", border: "1px solid blue", height: "50px" }}>
+        <div onClick={handleOperatorsClick} style={{ width: "500px", border: "1px solid blue", height: "50px" }}>
             <button id="add" value="+">+</button>
             <button id="equals" value="=">=</button>
             <button id="clear" value="clear">AC</button>
@@ -156,7 +163,9 @@ const inputReducer = (state = '0', action) => {
         case ADD_NUMBER:
             return state + action.number
         case ADD_DECIMAL:
-            if (state[state.length - 1].indexOf('.') == -1) {
+            if(state.toString().length == 1) {
+                return state + '.'
+            } else if(state[state.length - 1].indexOf('.') == -1) {
                 return state + '.'
             }
             return state
@@ -176,18 +185,19 @@ const inputReducer = (state = '0', action) => {
     }
 }
 
-const outputReducer = (state = '', action) => {
+const outputReducer = (state = '0', action) => {
     switch (action.type) {
         case FIRST_NUMBER:
             return eval(parseInt(state + action.number))
         case ADD_NUMBER:
             return state + action.number
         case ADD_DECIMAL:
-            if (state[state.length - 1].indexOf('.') == -1) {
+            if(state.toString().length == 1){
+                return state + '.'
+            } else if(state[state.length - 1].indexOf('.') == -1) {
                 return state + '.'
             }
             return state
-            return state + '.'
         case ADD_ZERO:
             if (contains_decimal.test(state) || state != "0") {
                 return state + "0"
@@ -202,7 +212,7 @@ const outputReducer = (state = '', action) => {
                 alert("Please finish the operation or click clear")
             }
         case CLEAR:
-            state = ''
+            state = '0'
         default:
             return state
     }
