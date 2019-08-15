@@ -29,7 +29,7 @@ const NumPad = (props) => {
         }
     }
     return (
-        <div onClick={handleNumPadClick} style={{ width: "500px", border: "1px solid green", height: "50px" }}>
+        <div onClick={handleNumPadClick} style={{ width: "500px", border: "1px solid green", height: "100px" }}>
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
             <button id="thre" value="3">3</button>
