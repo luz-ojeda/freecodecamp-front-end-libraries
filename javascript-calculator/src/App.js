@@ -29,7 +29,7 @@ const NumPad = (props) => {
         }
     }
     return (
-        <div onClick={handleNumPadClick} style={{ width: "500px", border: "1px solid green", height: "50px" }}>
+        <div onClick={handleNumPadClick} style={{ width: "500px", border: "1px solid green", height: "100px" }}>
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
             <button id="thre" value="3">3</button>
@@ -59,6 +59,7 @@ const Operators = (props) => {
     return (
         <div onClick={handleOperatorsClick} style={{ width: "500px", border: "1px solid blue", height: "50px" }}>
             <button id="add" value="+">+</button>
+            <button id="subtract" value="-">-</button>
             <button id="equals" value="=">=</button>
             <button id="clear" value="clear">AC</button>
         </div>
@@ -165,7 +166,7 @@ const inputReducer = (state = '0', action) => {
         case ADD_DECIMAL:
             if(state.toString().length == 1) {
                 return state + '.'
-            } else if(state[state.length - 1].indexOf('.') == -1) {
+            } else if(state.toString()[state.toString().length - 1].indexOf('.') == -1) {
                 return state + '.'
             }
             return state
@@ -194,7 +195,7 @@ const outputReducer = (state = '0', action) => {
         case ADD_DECIMAL:
             if(state.toString().length == 1){
                 return state + '.'
-            } else if(state[state.length - 1].indexOf('.') == -1) {
+            } else if(state.toString()[state.toString().length - 1].indexOf('.') == -1) {
                 return state + '.'
             }
             return state
