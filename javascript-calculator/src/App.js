@@ -34,7 +34,7 @@ const NumPad = (props) => {
         <div onClick={handleNumPadClick} style={{ width: "500px", border: "1px solid green", height: "100px" }}>
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
-            <button id="thre" value="3">3</button>
+            <button id="three" value="3">3</button>
             <button id="four" value="4">4</button>
             <button id="five" value="5">5</button>
             <button id="six" value="6">6</button>
@@ -61,6 +61,9 @@ const Operators = (props) => {
     return (
         <div onClick={handleOperatorsClick} style={{ width: "500px", border: "1px solid blue", height: "50px" }}>
             <button id="add" value="+">+</button>
+            <button id="subtract" value="-">-</button>
+            <button id="multiply" value="*">*</button>
+            <button id="divide" value="/">/</button>
             <button id="equals" value="=">=</button>
             <button id="clear" value="clear">AC</button>
         </div>
