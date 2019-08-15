@@ -15,16 +15,18 @@ const Display = (props) => {
 
 }
 
+var contains_decimal = (/\./)
+
 //NUMPAD
 const NumPad = (props) => {
     function handleNumPadClick(e) {
-        if (e.target.value == ".") {
+        if (e.target.value == "." && !contains_decimal.test(props.input)) {
             props.addNewDecimal(e.target.value)
         } else if (e.target.value == "0") {
             props.addNewZero(e.target.value)
         } else if (props.input.length == 1 && props.input == 0) {
             props.addFirstNumber_dispatched(e.target.value)
-        } else {
+        } else if((/[0-9]/).test(e.target.value)) {
             props.addNewNumber(e.target.value)
         }
     }
@@ -154,7 +156,6 @@ const clearResultAndOperation = () => {
 }
 
 //REDUCER     
-var contains_decimal = (/\./)
 
 const inputReducer = (state = '0', action) => {
     switch (action.type) {
