@@ -4,10 +4,10 @@
 const Display = (props) => {
     return (
         <div id="display-container">
-            <div id="display" style={{ width: "500px", border: "1px solid red", height: "50px" }}>
+            <div id="display-input" className="display" style={{ border: "1px solid red" }}>
                 {props.input}
             </div>
-            <div id="display-output" style={{ width: "500px", border: "1px solid green", height: "50px" }}>
+            <div id="display" className="display" style={{ border: "1px solid green" }}>
                 {props.operation}
             </div>
         </div>
@@ -15,24 +15,26 @@ const Display = (props) => {
 
 }
 
+var contains_decimal = (/\./)
+
 //NUMPAD
 const NumPad = (props) => {
     function handleNumPadClick(e) {
-        if (e.target.value == ".") {
+        if (e.target.value == "." && !contains_decimal.test(props.input)) {
             props.addNewDecimal(e.target.value)
         } else if (e.target.value == "0") {
             props.addNewZero(e.target.value)
         } else if (props.input.length == 1 && props.input == 0) {
             props.addFirstNumber_dispatched(e.target.value)
-        } else {
+        } else if ((/[0-9]/).test(e.target.value)) {
             props.addNewNumber(e.target.value)
         }
     }
     return (
-        <div onClick={handleNumPadClick} style={{ width: "500px", border: "1px solid green", height: "100px" }}>
+        <div className="keypad" onClick={handleNumPadClick}>
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
-            <button id="thre" value="3">3</button>
+            <button id="three" value="3">3</button>
             <button id="four" value="4">4</button>
             <button id="five" value="5">5</button>
             <button id="six" value="6">6</button>
@@ -57,9 +59,11 @@ const Operators = (props) => {
         }
     }
     return (
-        <div onClick={handleOperatorsClick} style={{ width: "500px", border: "1px solid blue", height: "50px" }}>
+        <div className="keypad" onClick={handleOperatorsClick}>
             <button id="add" value="+">+</button>
             <button id="subtract" value="-">-</button>
+            <button id="multiply" value="*">*</button>
+            <button id="divide" value="/">/</button>
             <button id="equals" value="=">=</button>
             <button id="clear" value="clear">AC</button>
         </div>
@@ -74,9 +78,8 @@ class Presentational extends React.Component {
     }
 
     render() {
-        var result = '';
         return (
-            <div>
+            <div className="container">
                 <Display
                     input={this.props.input}
                     operation={this.props.operation}
@@ -155,7 +158,6 @@ const clearResultAndOperation = () => {
 }
 
 //REDUCER     
-var contains_decimal = (/\./)
 
 const inputReducer = (state = '0', action) => {
     switch (action.type) {
@@ -164,9 +166,9 @@ const inputReducer = (state = '0', action) => {
         case ADD_NUMBER:
             return state + action.number
         case ADD_DECIMAL:
-            if(state.toString().length == 1) {
+            if (state.toString().length == 1) {
                 return state + '.'
-            } else if(state.toString()[state.toString().length - 1].indexOf('.') == -1) {
+            } else if (state[state.length - 1].indexOf('.') == -1) {
                 return state + '.'
             }
             return state
@@ -193,9 +195,9 @@ const outputReducer = (state = '0', action) => {
         case ADD_NUMBER:
             return state + action.number
         case ADD_DECIMAL:
-            if(state.toString().length == 1){
+            if (state.toString().length == 1) {
                 return state + '.'
-            } else if(state.toString()[state.toString().length - 1].indexOf('.') == -1) {
+            } else if (state[state.length - 1].indexOf('.') == -1) {
                 return state + '.'
             }
             return state
@@ -205,12 +207,28 @@ const outputReducer = (state = '0', action) => {
             }
             return state
         case ADD_OPERATOR:
+            var is_operator = (/\/|\*|\-|\+/)
+            var is_number = (/[0-9]/)
+            var two_operators = /(\/|\*|\-|\+){2}/
+            if(two_operators.test(state.toString().slice(-2))){
+                console.log("first")
+                return state.replace(state.toString().slice(-2), action.operator)
+            } else if(is_number.test(state) && state.toString().length == 1 || is_number.test(state[state.length - 1])){
+                return state + action.operator
+
+            } else if (is_operator.test(state[state.length -1]) && action.operator != "-"){
+                return state.substring(0, state.length - 1) + action.operator
+            } else if (is_operator.test(state[state.length - 1]) && state[state.length - 1] != "-") {
+                return state + action.operator
+            }
             return state + action.operator
+
         case EVALUATE:
             try {
                 return eval(state)
             } catch (err) {
                 alert("Please finish the operation or click clear")
+                return state
             }
         case CLEAR:
             state = '0'
