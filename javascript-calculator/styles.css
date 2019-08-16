@@ -7,97 +7,79 @@
 body {
     display:flex;
     justify-content: center;
+    background: #17223b;
 }
 
 .root-container {
     display:flex;
     flex-direction:column;
-    border: 2px solid red;
-    padding: 20px;
+    border: 2px solid black;
+    border-radius:5px;
+    padding: 10px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 200px;
-}
-
-<<<<<<< Updated upstream
-#display { 
-    height: 20px;
-    width: 300px;
-    border: 1px solid blue;
-=======
-.presentational-component {
-    display:flex;
-    flex-direction: column;
-    border:1px solid green;
-    padding: 10px;
+    background:#263859;
 }
 
 .display-container {
-    border:1px solid blue;
-    padding: 5px;
+    background: #6b778d;
+    margin-bottom: 5px;
+    padding: 2px 5px 2px 0;
+
+    font-family: 'Graduate', cursive;
+    font-size: 1.2em;
     text-align: right;
->>>>>>> Stashed changes
 }
 
-.keypad {
+.keypad-container {
     display:flex;
-<<<<<<< Updated upstream
-    flex-wrap:wrap;
-    justify-content: center;
-
-    border: 1px solid green;
-    height: auto;
-    margin: 10px;
-    width: 300px;
+    width: 200px;   
 }
 
 .keypad > button {
-    width: 50px;
-    height: 50px;
-=======
+    border:none;
+    font-size: 1em;
+    font-family: 'Comfortaa', cursive;
+}
+
+.numpad {
+    background: #ff6768;
+    display:flex;
+    flex-wrap:wrap;
+    align-items: center;
     justify-content:center;
-    flex-wrap:wrap;
-    border: 1px solid yellow;
-    padding: 5px;
+
+    margin-right: 2px;
+    width: 170px;
 }
 
-.keypad > button {
-    border-radius: 6px;
-    border: none;
-    height: 35px;
-    margin: 2px;
-    width: 35px;
+.numpad > button {
+    background: #ff6768;
+    height: 50px;
+    width: 50px;
 }
 
-.keypad > button:hover {
-    border: 1px solid red;
+button[value="0"] {
+    width: 62%;
 }
 
-button[value="0"]{
-    border-radius: 3px;
-    width:70px;
->>>>>>> Stashed changes
-}
-
-#numbers { 
+.operators {
+    background: #6b778d;
     display:flex;
-    flex-wrap:wrap;
-    justify-content: center;
-    margin: 5px 0 5px 5px;
-    width: 160px;
-    border: 1px solid green;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
 
-#operators { 
-    display:flex;
-    flex-wrap:wrap;
-    justify-content: center;
-    margin: 5px 5px 5px 10px;
-    width:110px;
-    border: 1px solid green;
+.operators {
+    width: 40px;
 }
 
-button[value="clear"]{
-    width:100%;
+.operators > button {
+    background: #6b778d;
+    font-weight: bold;
+    height: 34px;
+    width: 34px;
 }
+

@@ -3,11 +3,11 @@
 //DISPLAY
 const Display = (props) => {
     return (
-        <div id="display-container">
-            <div id="display-input" className="display" style={{ border: "1px solid red" }}>
+        <div className="display-container" id="display-container">
+            <div id="display-input" className="display">
                 {props.input}
             </div>
-            <div id="display" className="display" style={{ border: "1px solid green" }}>
+            <div id="display" className="display">
                 {props.operation}
             </div>
         </div>
@@ -31,7 +31,7 @@ const NumPad = (props) => {
         }
     }
     return (
-        <div className="keypad" onClick={handleNumPadClick}>
+        <div className="keypad numpad" onClick={handleNumPadClick}>
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
             <button id="three" value="3">3</button>
@@ -59,10 +59,10 @@ const Operators = (props) => {
         }
     }
     return (
-        <div className="keypad" onClick={handleOperatorsClick}>
+        <div className="keypad operators" onClick={handleOperatorsClick}>
             <button id="add" value="+">+</button>
             <button id="subtract" value="-">-</button>
-            <button id="multiply" value="*">*</button>
+            <button id="multiply" value="*">x</button>
             <button id="divide" value="/">/</button>
             <button id="equals" value="=">=</button>
             <button id="clear" value="clear">AC</button>
@@ -84,17 +84,18 @@ class Presentational extends React.Component {
                     input={this.props.input}
                     operation={this.props.operation}
                     result={this.props.result} />
+                <div className="keypad-container">
+                    <NumPad
+                        input={this.props.input} addFirstNumber_dispatched={this.props.addFirstNumber_dispatched} addNewNumber={this.props.addNewNumber} addNewDecimal={this.props.addNewDecimal} addNewZero={this.props.addNewZero} />
 
-                <NumPad
-                    input={this.props.input} addFirstNumber_dispatched={this.props.addFirstNumber_dispatched} addNewNumber={this.props.addNewNumber} addNewDecimal={this.props.addNewDecimal} addNewZero={this.props.addNewZero} />
-
-                <Operators
-                    operation={this.props.operation}
-                    addNewOperator={this.props.addNewOperator}
-                    evaluateOperation_dispatched={this.props.evaluateOperation_dispatched}
-                    result={this.props.result}
-                    clearResultAndOperation_dispatched={this.props.clearResultAndOperation_dispatched} />
-            </div>
+                    <Operators
+                        operation={this.props.operation}
+                        addNewOperator={this.props.addNewOperator}
+                        evaluateOperation_dispatched={this.props.evaluateOperation_dispatched}
+                        result={this.props.result}
+                        clearResultAndOperation_dispatched={this.props.clearResultAndOperation_dispatched} />
+                </div>
+            </div >
         )
     }
 }
@@ -210,13 +211,13 @@ const outputReducer = (state = '0', action) => {
             var is_operator = (/\/|\*|\-|\+/)
             var is_number = (/[0-9]/)
             var two_operators = /(\/|\*|\-|\+){2}/
-            if(two_operators.test(state.toString().slice(-2))){
+            if (two_operators.test(state.toString().slice(-2))) {
                 console.log("first")
                 return state.replace(state.toString().slice(-2), action.operator)
-            } else if(is_number.test(state) && state.toString().length == 1 || is_number.test(state[state.length - 1])){
+            } else if (is_number.test(state) && state.toString().length == 1 || is_number.test(state[state.length - 1])) {
                 return state + action.operator
 
-            } else if (is_operator.test(state[state.length -1]) && action.operator != "-"){
+            } else if (is_operator.test(state[state.length - 1]) && action.operator != "-") {
                 return state.substring(0, state.length - 1) + action.operator
             } else if (is_operator.test(state[state.length - 1]) && state[state.length - 1] != "-") {
                 return state + action.operator
