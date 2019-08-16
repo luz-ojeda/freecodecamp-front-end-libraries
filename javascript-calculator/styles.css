@@ -4,28 +4,45 @@
     box-sizing: border-box;
   }
 
-#root {
+body {
     display:flex;
     justify-content: center;
 }
 
-.container {
+.root-container {
     display:flex;
     flex-direction:column;
     border: 2px solid red;
+    padding: 20px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    width: 200px;
 }
 
+<<<<<<< Updated upstream
 #display { 
     height: 20px;
     width: 300px;
     border: 1px solid blue;
+=======
+.presentational-component {
+    display:flex;
+    flex-direction: column;
+    border:1px solid green;
+    padding: 10px;
 }
 
-.keypad { 
+.display-container {
+    border:1px solid blue;
+    padding: 5px;
+    text-align: right;
+>>>>>>> Stashed changes
+}
+
+.keypad {
     display:flex;
+<<<<<<< Updated upstream
     flex-wrap:wrap;
     justify-content: center;
 
@@ -38,6 +55,29 @@
 .keypad > button {
     width: 50px;
     height: 50px;
+=======
+    justify-content:center;
+    flex-wrap:wrap;
+    border: 1px solid yellow;
+    padding: 5px;
+}
+
+.keypad > button {
+    border-radius: 6px;
+    border: none;
+    height: 35px;
+    margin: 2px;
+    width: 35px;
+}
+
+.keypad > button:hover {
+    border: 1px solid red;
+}
+
+button[value="0"]{
+    border-radius: 3px;
+    width:70px;
+>>>>>>> Stashed changes
 }
 
 #numbers { 
@@ -56,4 +96,8 @@
     margin: 5px 5px 5px 10px;
     width:110px;
     border: 1px solid green;
+}
+
+button[value="clear"]{
+    width:100%;
 }
