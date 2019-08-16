@@ -19,16 +19,23 @@
 }
 
 #display { 
-    height: 100px;
+    height: 20px;
+    width: 300px;
     border: 1px solid blue;
 }
 
 .keypad { 
     display:flex;
-    border: 1px solid blue;
+    flex-wrap:wrap;
+    justify-content: center;
+
+    border: 1px solid green;
+    height: auto;
+    margin: 10px;
+    width: 300px;
 }
 
-button {
+.keypad > button {
     width: 50px;
     height: 50px;
 }
