@@ -4,10 +4,10 @@
 const Display = (props) => {
     return (
         <div id="display-container">
-            <div id="display" style={{ width: "500px", border: "1px solid red", height: "50px" }}>
+            <div id="display-input" className="display" style={{ border: "1px solid red" }}>
                 {props.input}
             </div>
-            <div id="display-output" style={{ width: "500px", border: "1px solid green", height: "50px" }}>
+            <div id="display" className="display" style={{ border: "1px solid green" }}>
                 {props.operation}
             </div>
         </div>
@@ -26,12 +26,12 @@ const NumPad = (props) => {
             props.addNewZero(e.target.value)
         } else if (props.input.length == 1 && props.input == 0) {
             props.addFirstNumber_dispatched(e.target.value)
-        } else if((/[0-9]/).test(e.target.value)) {
+        } else if ((/[0-9]/).test(e.target.value)) {
             props.addNewNumber(e.target.value)
         }
     }
     return (
-        <div onClick={handleNumPadClick} style={{ width: "500px", border: "1px solid green", height: "100px" }}>
+        <div className="keypad" onClick={handleNumPadClick}>
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
             <button id="three" value="3">3</button>
@@ -59,7 +59,7 @@ const Operators = (props) => {
         }
     }
     return (
-        <div onClick={handleOperatorsClick} style={{ width: "500px", border: "1px solid blue", height: "50px" }}>
+        <div className="keypad" onClick={handleOperatorsClick}>
             <button id="add" value="+">+</button>
             <button id="subtract" value="-">-</button>
             <button id="multiply" value="*">*</button>
@@ -78,9 +78,8 @@ class Presentational extends React.Component {
     }
 
     render() {
-        var result = '';
         return (
-            <div>
+            <div className="container">
                 <Display
                     input={this.props.input}
                     operation={this.props.operation}
@@ -167,9 +166,9 @@ const inputReducer = (state = '0', action) => {
         case ADD_NUMBER:
             return state + action.number
         case ADD_DECIMAL:
-            if(state.toString().length == 1) {
+            if (state.toString().length == 1) {
                 return state + '.'
-            } else if(state[state.length - 1].indexOf('.') == -1) {
+            } else if (state[state.length - 1].indexOf('.') == -1) {
                 return state + '.'
             }
             return state
@@ -196,9 +195,9 @@ const outputReducer = (state = '0', action) => {
         case ADD_NUMBER:
             return state + action.number
         case ADD_DECIMAL:
-            if(state.toString().length == 1){
+            if (state.toString().length == 1) {
                 return state + '.'
-            } else if(state[state.length - 1].indexOf('.') == -1) {
+            } else if (state[state.length - 1].indexOf('.') == -1) {
                 return state + '.'
             }
             return state
@@ -208,12 +207,21 @@ const outputReducer = (state = '0', action) => {
             }
             return state
         case ADD_OPERATOR:
-            return state + action.operator
+            var is_operator = (/\/|\*|\-|\+/)
+
+            if (is_operator.test(state[state.length - 1])) {
+                return state.substring(0, state.length - 1) + action.operator
+            } else if (state) {
+                console.log("second clause")
+                return state + action.operator
+            }
+            return state
         case EVALUATE:
             try {
                 return eval(state)
             } catch (err) {
                 alert("Please finish the operation or click clear")
+                return state
             }
         case CLEAR:
             state = '0'
