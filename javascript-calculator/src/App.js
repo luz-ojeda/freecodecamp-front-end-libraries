@@ -24,7 +24,7 @@ const NumPad = (props) => {
             props.addNewDecimal(e.target.value)
         } else if (e.target.value == "0") {
             props.addNewZero(e.target.value)
-        } else if (props.input.length == 1 && props.input == 0) {
+        } else if (props.input.length == 1 && props.input == 0){
             props.addFirstNumber_dispatched(e.target.value)
         } else if ((/[0-9]/).test(e.target.value)) {
             props.addNewNumber(e.target.value)
@@ -100,6 +100,7 @@ class Presentational extends React.Component {
     }
 }
 
+////////////////////////////////////////////////
 // REDUX
 
 const FIRST_NUMBER = 'FIRST_NUMBER'
@@ -181,7 +182,11 @@ const inputReducer = (state = '0', action) => {
         case ADD_OPERATOR:
             return action.operator
         case EVALUATE:
-            state = ''
+            try {
+                return eval(state)
+            } catch (err) {
+                return state
+            }
         case CLEAR:
             state = '0'
         default:
@@ -228,7 +233,7 @@ const outputReducer = (state = '0', action) => {
             try {
                 return eval(state)
             } catch (err) {
-                alert("Please finish the operation or click clear")
+                alert("Please finish the operation or clear input (AC)")
                 return state
             }
         case CLEAR:
