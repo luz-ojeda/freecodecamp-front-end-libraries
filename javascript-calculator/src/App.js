@@ -209,13 +209,17 @@ const outputReducer = (state = '0', action) => {
         case ADD_OPERATOR:
             var is_operator = (/\/|\*|\-|\+/)
 
-            if (is_operator.test(state[state.length - 1])) {
-                return state.substring(0, state.length - 1) + action.operator
-            } else if (state) {
-                console.log("second clause")
+            if (action.operator == "-" && is_operator.test(state[state.length - 1])) {
+                console.log("first clause")
                 return state + action.operator
             }
-            return state
+            else if (is_operator.test(state[state.length - 1])){
+                console.log("second clause")
+                return state.substring(0, state.length - 1) + action.operator
+            } else {
+                console.log("third clause")
+                return state + action.operator
+            }
         case EVALUATE:
             try {
                 return eval(state)
