@@ -208,18 +208,21 @@ const outputReducer = (state = '0', action) => {
             return state
         case ADD_OPERATOR:
             var is_operator = (/\/|\*|\-|\+/)
+            var is_number = (/[0-9]/)
+            var two_operators = /(\/|\*|\-|\+){2}/
+            if(two_operators.test(state.toString().slice(-2))){
+                console.log("first")
+                return state.replace(state.toString().slice(-2), action.operator)
+            } else if(is_number.test(state) && state.toString().length == 1 || is_number.test(state[state.length - 1])){
+                return state + action.operator
 
-            if (action.operator == "-" && is_operator.test(state[state.length - 1])) {
-                console.log("first clause")
-                return state + action.operator
-            }
-            else if (is_operator.test(state[state.length - 1])){
-                console.log("second clause")
+            } else if (is_operator.test(state[state.length -1]) && action.operator != "-"){
                 return state.substring(0, state.length - 1) + action.operator
-            } else {
-                console.log("third clause")
+            } else if (is_operator.test(state[state.length - 1]) && state[state.length - 1] != "-") {
                 return state + action.operator
             }
+            return state + action.operator
+
         case EVALUATE:
             try {
                 return eval(state)
