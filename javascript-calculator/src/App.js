@@ -12,7 +12,6 @@ const Display = (props) => {
             </div>
         </div>
     )
-
 }
 
 var contains_decimal = (/\./)
@@ -24,7 +23,7 @@ const NumPad = (props) => {
             props.addNewDecimal(e.target.value)
         } else if (e.target.value == "0") {
             props.addNewZero(e.target.value)
-        } else if (props.input.length == 1 && props.input == 0){
+        } else if (props.input.length == 1 && props.input == 0) {
             props.addFirstNumber_dispatched(e.target.value)
         } else if ((/[0-9]/).test(e.target.value)) {
             props.addNewNumber(e.target.value)

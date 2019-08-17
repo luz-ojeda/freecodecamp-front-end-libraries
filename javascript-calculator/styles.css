@@ -34,6 +34,12 @@ body {
     font-family: 'Graduate', cursive;
     font-size: 1.2em;
     text-align: right;
+    width:400px;
+    white-space: nowrap;
+}
+
+.display {
+    overflow-x:scroll;
 }
 
 .keypad-container {
@@ -43,6 +49,7 @@ body {
 
 .keypad > button {
     border:none;
+    cursor:pointer;
     font-size: 1em;
     font-family: 'Comfortaa', cursive;
     transition: 0.15s;
