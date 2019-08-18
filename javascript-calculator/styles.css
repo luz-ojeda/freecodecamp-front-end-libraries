@@ -34,12 +34,12 @@ body {
     font-family: 'Graduate', cursive;
     font-size: 1.2em;
     text-align: right;
-    width:400px;
-    white-space: nowrap;
+    width:200px;
 }
 
 .display {
-    overflow-x:scroll;
+    display:flex;
+    overflow-x:auto;
 }
 
 .keypad-container {
@@ -140,11 +140,11 @@ footer {
 @media only screen and (min-width : 640px) {
     .display-container {
         height: 100px;
+        width: 378px;
     }
     .display {
         font-size: 1.5em;
         height:50px;
-        display:flex;
         align-items:center;
         justify-content: flex-end;
     }

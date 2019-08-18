@@ -20,17 +20,30 @@ var contains_decimal = (/\./)
 const NumPad = (props) => {
     function handleNumPadClick(e) {
         if (e.target.value == "." && !contains_decimal.test(props.input)) {
-            props.addNewDecimal(e.target.value)
+            props.addNewDecimal()
         } else if (e.target.value == "0") {
-            props.addNewZero(e.target.value)
+            props.addNewZero()
         } else if (props.input.length == 1 && props.input == 0) {
             props.addFirstNumber_dispatched(e.target.value)
-        } else if ((/[0-9]/).test(e.target.value)) {
+        } else { 
+            ((/[0-9]/).test(e.target.value)) 
             props.addNewNumber(e.target.value)
         }
     }
+
+    function handleNumPadKeyDown(e) {
+        if (e.key == "." && !contains_decimal.test(props.input)) {
+            props.addNewDecimal()
+        } else if (e.key == "0") {
+            props.addNewZero()
+        } else if (props.input.length == 1 && props.input == 0) {
+            props.addFirstNumber_dispatched(e.key)
+        } else if ((/[0-9]/).test(e.key)){
+            props.addNewNumber(e.key)
+        }
+    }
     return (
-        <div className="keypad numpad" onClick={handleNumPadClick}>
+        <div className="keypad numpad" onClick={handleNumPadClick} onKeyDown={handleNumPadClick} onKeyDown={handleNumPadKeyDown} tabIndex="1">
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
             <button id="three" value="3">3</button>
@@ -41,7 +54,7 @@ const NumPad = (props) => {
             <button id="eight" value="8">8</button>
             <button id="nine" value="9">9</button>
             <button id="zero" value="0">0</button>
-            <button id="decimal" value=".">.</button>
+            <button id="decimal" tabIndex="0" value=".">.</button>
         </div>
     )
 }
@@ -57,8 +70,18 @@ const Operators = (props) => {
             props.addNewOperator(e.target.value)
         }
     }
+
+    function handleOperatorsKeyDown(e) {
+        if (e.key == "=") {
+            props.evaluateOperation_dispatched(props.operation)
+        } else if(e.key =="C") {
+            props.clearResultAndOperation_dispatched()
+        } else if ((/\/|\*|\-|\+/).test(e.key)){
+            props.addNewOperator(e.key)
+        }
+    }
     return (
-        <div className="keypad operators" onClick={handleOperatorsClick}>
+        <div className="keypad operators" onClick={handleOperatorsClick} onKeyDown={handleOperatorsKeyDown} tabIndex="1">
             <button id="add" value="+">+</button>
             <button id="subtract" value="-">-</button>
             <button id="multiply" value="*">x</button>
@@ -168,9 +191,9 @@ const inputReducer = (state = '0', action) => {
             return state + action.number
         case ADD_DECIMAL:
             if (state.toString().length == 1) {
-                return state + '.'
+                return state + '.'//if it's first number just add the decimal
             } else if (state[state.length - 1].indexOf('.') == -1) {
-                return state + '.'
+                return state + '.'//if it's not the first number, check that the last character is not a decimal to avoid repetition
             }
             return state
         case ADD_ZERO:
@@ -201,7 +224,7 @@ const outputReducer = (state = '0', action) => {
             return state + action.number
         case ADD_DECIMAL:
             if (state.toString().length == 1) {
-                return state + '.'
+                return state + '.' 
             } else if (state[state.length - 1].indexOf('.') == -1) {
                 return state + '.'
             }
@@ -215,8 +238,8 @@ const outputReducer = (state = '0', action) => {
             var is_operator = (/\/|\*|\-|\+/)
             var is_number = (/[0-9]/)
             var two_operators = /(\/|\*|\-|\+){2}/
+
             if (two_operators.test(state.toString().slice(-2))) {
-                console.log("first")
                 return state.replace(state.toString().slice(-2), action.operator)
             } else if (is_number.test(state) && state.toString().length == 1 || is_number.test(state[state.length - 1])) {
                 return state + action.operator
