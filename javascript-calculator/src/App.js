@@ -31,19 +31,9 @@ const NumPad = (props) => {
         }
     }
 
-    function handleNumPadKeyDown(e) {
-        if (e.key == "." && !contains_decimal.test(props.input)) {
-            props.addNewDecimal()
-        } else if (e.key == "0") {
-            props.addNewZero()
-        } else if (props.input.length == 1 && props.input == 0) {
-            props.addFirstNumber_dispatched(e.key)
-        } else if ((/[0-9]/).test(e.key)){
-            props.addNewNumber(e.key)
-        }
-    }
+
     return (
-        <div className="keypad numpad" onClick={handleNumPadClick} onKeyDown={handleNumPadClick} onKeyDown={handleNumPadKeyDown} tabIndex="1">
+        <div className="keypad numpad" onClick={handleNumPadClick} tabIndex="1">
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
             <button id="three" value="3">3</button>
@@ -71,17 +61,8 @@ const Operators = (props) => {
         }
     }
 
-    function handleOperatorsKeyDown(e) {
-        if (e.key == "=") {
-            props.evaluateOperation_dispatched(props.operation)
-        } else if(e.key =="C") {
-            props.clearResultAndOperation_dispatched()
-        } else if ((/\/|\*|\-|\+/).test(e.key)){
-            props.addNewOperator(e.key)
-        }
-    }
     return (
-        <div className="keypad operators" onClick={handleOperatorsClick} onKeyDown={handleOperatorsKeyDown} tabIndex="1">
+        <div className="keypad operators" onClick={handleOperatorsClick} tabIndex="1">
             <button id="add" value="+">+</button>
             <button id="subtract" value="-">-</button>
             <button id="multiply" value="*">x</button>
@@ -97,11 +78,31 @@ const Operators = (props) => {
 class Presentational extends React.Component {
     constructor(props) {
         super(props);
+        this.handleKeyDown = this.handleKeyDown.bind(this)
     }
+
+    handleKeyDown(e) {
+        if (e.key == "." && !contains_decimal.test(this.props.input)) {
+            this.props.addNewDecimal()
+        } else if (e.key == "0") {
+            this.props.addNewZero()
+        } else if (this.props.input.length == 1 && this.props.input == 0) {
+            this.props.addFirstNumber_dispatched(e.key)
+        } else if ((/[0-9]/).test(e.key)){
+            this.props.addNewNumber(e.key)
+        } else if (e.key == "=") {
+            this.props.evaluateOperation_dispatched(this.props.operation)
+        } else if(e.key =="C" || e.key == "c") {
+            this.props.clearResultAndOperation_dispatched()
+        } else if ((/\/|\*|\-|\+/).test(e.key)){
+            this.props.addNewOperator(e.key)
+        }
+    }
+    
 
     render() {
         return (
-            <div className="container">
+            <div className="container" onKeyDown={this.handleKeyDown}>
                 <Display
                     input={this.props.input}
                     operation={this.props.operation}
