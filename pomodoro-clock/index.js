@@ -3,7 +3,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             running: false,
-            stage: 'session',
+            stage: 'Session',
             minutes: '25',
             seconds: '00',
             sessionLength: '25',
@@ -13,6 +13,7 @@ class App extends React.Component {
         this.handleReset = this.handleReset.bind(this)
         this.handleSessionLength = this.handleSessionLength.bind(this)
         this.handleBreakLength = this.handleBreakLength.bind(this)
+        this.audio = React.createRef()
     }
 
     componentWillUnmount() {
@@ -26,17 +27,26 @@ class App extends React.Component {
                 seconds: 59 //minute change
             }))
         } else if (this.state.seconds == "00" && this.state.minutes < 10) {
-            if (this.state.minutes == "00" && this.state.stage == 'session') {
+            if (this.state.minutes == "00" && this.state.stage == 'Session') { //change to break
                 this.setState((state) => ({
                     minutes: "0" + state.breakLength,
                     seconds: '00',
-                    stage: 'break'
+                    stage: 'Break'
                 }))
-            } else if (this.state.minutes == "00" && this.state.stage == 'break') {
-                this.setState((state) => ({
-                    minutes: "0" + state.sessionLength,
-                    stage: 'session'
-                }))
+                this.audio.current.play()
+            } else if (this.state.minutes == "00" && this.state.stage == 'Break') { //change to session
+                if(this.state.sessionLength > 10) {
+                    this.setState((state) => ({
+                        minutes: state.sessionLength,
+                        stage: 'Session'
+                    }))
+                    this.audio.current.play()
+                } else {
+                    this.setState((state) => ({
+                        minutes: "0" + state.sessionLength,
+                        stage: 'Session'
+                    }))
+                }
             } else {
                 this.setState((state) => ({
                     minutes: "0" + (state.minutes - 1),
@@ -76,9 +86,13 @@ class App extends React.Component {
             running: false,
             minutes: '25',
             seconds: '00',
-            sessionLength: '25'
+            sessionLength: '25',
+            breakLength: '5',
+            stage: 'Session'
         }))
         clearInterval(this.timerID)
+        this.audio.current.pause()
+        this.audio.current.currentTime = 0;
     }
 
     handleSessionLength(e) {
@@ -87,7 +101,7 @@ class App extends React.Component {
                 minutes: parseInt(state.minutes) + 1,
                 sessionLength: parseInt(state.sessionLength) + 1
             }))
-        } else if(e.target.value == "decrement" && this.state.sessionLength > "01"){
+        } else if (e.target.value == "decrement" && this.state.sessionLength > "01") {
             if (this.state.minutes > 10) {
                 this.setState((state) => ({
                     minutes: parseInt(state.minutes) - 1,
@@ -96,7 +110,7 @@ class App extends React.Component {
             } else {
                 this.setState((state) => ({
                     minutes: "0" + (parseInt(state.minutes) - 1),
-                    sessionLength: "0" + (parseInt(state.sessionLength) - 1)
+                    sessionLength: (parseInt(state.sessionLength) - 1)
                 }))
             }
         }
@@ -119,6 +133,7 @@ class App extends React.Component {
             <div>
                 <h2 id="timer-label">{this.state.stage}</h2>
                 <div id="time-left">{this.state.minutes}:{this.state.seconds}</div>
+                <audio ref={this.audio} id="beep" src="beep.mp3"></audio>
                 <button id="start_stop" onClick={this.handleStartStop}>Start/Stop</button>
                 <button id="reset" onClick={this.handleReset}>Reset</button>
 
