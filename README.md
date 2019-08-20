@@ -20,3 +20,18 @@
 * CSS
 * Javascript
   * DOM manipulation
+  
+## 4. **[JavaScript Calculator](https://github.com/lezojeda/freecodecamp-front-end-libraries/tree/master/javascript-calculator)**
+
+* HTML
+* CSS
+* Javascript
+  * React
+  * Redux
+
+## 5. **[Pomodoro Clock](https://github.com/lezojeda/freecodecamp-front-end-libraries/tree/master/pomodoro-clock)**
+
+* HTML
+* CSS
+* Javascript
+  * React
