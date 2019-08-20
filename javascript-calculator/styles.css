@@ -137,7 +137,41 @@ footer {
     color: gray
 }
 
-@media only screen and (min-width : 640px) {
+@media only screen and (min-width : 640px) and (min-height: 600px) {
+    .display-container {
+        height: 70px;
+        width: 268px;
+    }
+    .display {
+        font-size: 1.2em;
+        height:40px;
+        align-items:center;
+        justify-content: flex-end;
+    }
+    .keypad > button {
+        font-size: 1.2em;
+    }
+    .numpad {
+        margin-right: 10px;
+        width: 210px;
+    }
+    .numpad > button {
+        height: 70px;
+        width: 70px;
+    }
+    .operators > button {
+        height: 55px;
+        width: 55px;
+    }
+    .keypad-container {
+        width: 270px;
+    }
+    .footer-text {
+        display:block;
+    }
+}
+
+@media only screen and (min-width : 640px) and (min-height: 900px) {
     .display-container {
         height: 100px;
         width: 378px;
