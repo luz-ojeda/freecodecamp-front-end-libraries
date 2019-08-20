@@ -20,7 +20,7 @@ class App extends React.Component {
         clearInterval(this.timerID);
     }
 
-    tick() {
+    tick() { //main clock function
         if (this.state.seconds == "00" && this.state.minutes > 10) {
             this.setState((state) => ({
                 minutes: state.minutes - 1,
@@ -64,7 +64,7 @@ class App extends React.Component {
         }
     }
 
-    handleStartStop() {
+    handleStartStop() { //first clause if it's running to stop, second clause to start if stopped
         if (this.state.running) {
             clearInterval(this.timerID)
             this.setState({
