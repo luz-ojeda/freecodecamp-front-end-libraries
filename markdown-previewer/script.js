@@ -68,7 +68,7 @@ class App extends React.Component {
                               <div class = "title">Editor</div>
                               <div id = "editor"><textarea value={this.state.text} onChange={this.handleChange}></textarea></div>
                         </div>
-                        <Previewer text={this.state.text} />
+                        <Previewer text={this.state.text}   />
                   </div >
             )
       }
