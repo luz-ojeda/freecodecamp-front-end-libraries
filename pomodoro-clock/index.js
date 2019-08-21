@@ -138,26 +138,26 @@ class App extends React.Component {
 
                 </div>
                 <div className="start-stop-reset-container">
-                    <button id="start_stop" onClick={this.handleStartStop}><i class="fa fa-play fa-2x"></i><i class="fa fa-pause fa-2x"></i></button>
-                    <button id="reset" onClick={this.handleReset}><i class="fas fa-history fa-2x"></i></button>
+                    <button id="start_stop" title="Start or pause current session/break" onClick={this.handleStartStop}><i class="fa fa-play fa-2x"></i><i class="fa fa-pause fa-2x"></i></button>
+                    <button id="reset" title="Reset current session/break and its values" onClick={this.handleReset}><i class="fas fa-history fa-2x"></i></button>
                 </div>
                 <div className="sesion-break-length-container">
 
                     <div class="label-buttons-container">
                         <h3 id="session-label">Session Length</h3>
                         <div class="buttons-container">
-                            <button id="session-decrement" value="decrement">-</button>
+                            <button id="session-decrement" value="decrement" title="Decrease session length" onClick={this.handleSessionLength}>-</button>
                             <div id="session-length">{this.state.sessionLength}</div>
-                            <button id="session-increment" value="increment" onClick={this.handleSessionLength}>+</button>
+                            <button id="session-increment" value="increment" title="Increase session length" onClick={this.handleSessionLength}>+</button>
                         </div>
 
                     </div>
                     <div class="label-buttons-container">
                         <h3 id="break-label">Break Length</h3>
                         <div class="buttons-container">
-                            <button id="break-decrement" value="decrement" onClick={this.handleBreakLength}>-</button>
+                            <button id="break-decrement" value="decrement" title="Decrease break length" onClick={this.handleBreakLength}>-</button>
                             <div id="break-length">{this.state.breakLength}</div>
-                            <button id="break-increment" value="increment" onClick={this.handleBreakLength}>+</button>
+                            <button id="break-increment" value="increment" title="Increase break length" onClick={this.handleBreakLength}>+</button>
                         </div>
                     </div>
                 </div>
