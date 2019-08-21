@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {
+    background: #a977ff;
+    display:flex;
+    justify-content: center;
+    font-family: 'Overlock', sans-serif;
+}
+
+h2, h3 {
+    font-family: 'Righteous', sans-serif;
+    margin-bottom: 2px;
+    text-align:center;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+button {
+    background: #83693A;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 5px;
+}
+
+#root {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 75%;
+}
+
+.app-container {
+    background: #ffd477;
+    border-radius: 6px;
+    display:flex;
+    flex-direction:column;
+}
+
+.time-display {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 5px 0 5px
+}
+
+.start-stop-reset-container {
+    display:flex;
+    justify-content: center;
+}
+
+.start-stop-reset-container > button, .buttons-container > button {
+    margin:6px;
+}
+
+.sesion-break-length-container {
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+    padding: 5px;
+}
+
+.buttons-container > button {
+    font-size: 1.6em;
+    font-weight: bold;
+    height: 40px;
+    width: 40px;
+}
+
+.label-buttons-container {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons-container {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-bottom: 9px;
+}
+
+#time-left, #session-length, #break-length {
+    font-size: 2.5em;
+}

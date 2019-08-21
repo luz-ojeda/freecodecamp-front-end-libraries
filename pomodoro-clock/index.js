@@ -35,7 +35,7 @@ class App extends React.Component {
                 }))
                 this.audio.current.play()
             } else if (this.state.minutes == "00" && this.state.stage == 'Break') { //change to session
-                if(this.state.sessionLength > 10) {
+                if (this.state.sessionLength > 10) {
                     this.setState((state) => ({
                         minutes: state.sessionLength,
                         stage: 'Session'
@@ -96,12 +96,12 @@ class App extends React.Component {
     }
 
     handleSessionLength(e) {
-        if (e.target.value == "increment" && this.state.sessionLength < "60") {
+        if (e.target.value == "increment" && this.state.sessionLength < "60" && !this.state.running) {
             this.setState((state) => ({
                 minutes: parseInt(state.minutes) + 1,
                 sessionLength: parseInt(state.sessionLength) + 1
             }))
-        } else if (e.target.value == "decrement" && this.state.sessionLength > "01") {
+        } else if (e.target.value == "decrement" && this.state.sessionLength > "01" && !this.state.running) {
             if (this.state.minutes > 10) {
                 this.setState((state) => ({
                     minutes: parseInt(state.minutes) - 1,
@@ -130,28 +130,39 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2 id="timer-label">{this.state.stage}</h2>
-                <div id="time-left">{this.state.minutes}:{this.state.seconds}</div>
-                <audio ref={this.audio} id="beep" src="beep.mp3"></audio>
-                <button id="start_stop" onClick={this.handleStartStop}>Start/Stop</button>
-                <button id="reset" onClick={this.handleReset}>Reset</button>
+            <div className="app-container">
+                <div className="time-display">
+                    <h2 id="timer-label">{this.state.stage}</h2>
+                    <div id="time-left">{this.state.minutes}:{this.state.seconds}</div>
+                    <audio ref={this.audio} id="beep" src="beep.mp3"></audio>
 
-                <br />
+                </div>
+                <div className="start-stop-reset-container">
+                    <button id="start_stop" onClick={this.handleStartStop}><i class="fa fa-play fa-2x"></i><i class="fa fa-pause fa-2x"></i></button>
+                    <button id="reset" onClick={this.handleReset}><i class="fas fa-history fa-2x"></i></button>
+                </div>
+                <div className="sesion-break-length-container">
 
-                <h3 id="session-label">Session Length</h3>
-                <button id="session-increment" value="increment" onClick={this.handleSessionLength}>+</button>
+                    <div class="label-buttons-container">
+                        <h3 id="session-label">Session Length</h3>
+                        <div class="buttons-container">
+                            <button id="session-decrement" value="decrement">-</button>
+                            <div id="session-length">{this.state.sessionLength}</div>
+                            <button id="session-increment" value="increment" onClick={this.handleSessionLength}>+</button>
+                        </div>
 
-                <div id="session-length">{this.state.sessionLength}</div>
+                    </div>
+                    <div class="label-buttons-container">
+                        <h3 id="break-label">Break Length</h3>
+                        <div class="buttons-container">
+                            <button id="break-decrement" value="decrement" onClick={this.handleBreakLength}>-</button>
+                            <div id="break-length">{this.state.breakLength}</div>
+                            <button id="break-increment" value="increment" onClick={this.handleBreakLength}>+</button>
+                        </div>
+                    </div>
+                </div>
 
-                <button id="session-decrement" value="decrement" onClick={this.handleSessionLength}>-</button>
 
-                <h3 id="break-label">Break Length</h3>
-                <button id="break-increment" value="increment" onClick={this.handleBreakLength}>+</button>
-
-                <div id="break-length">{this.state.breakLength}</div>
-
-                <button id="break-decrement" value="decrement" onClick={this.handleBreakLength}>-</button>
             </div>
         );
     }
