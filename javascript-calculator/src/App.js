@@ -25,8 +25,7 @@ const NumPad = (props) => {
             props.addNewZero()
         } else if (props.input.length == 1 && props.input == 0) {
             props.addFirstNumber_dispatched(e.target.value)
-        } else { 
-            ((/[0-9]/).test(e.target.value)) 
+        } else if((/[0-9]/).test(e.target.value)){ 
             props.addNewNumber(e.target.value)
         }
     }
@@ -192,6 +191,7 @@ const inputReducer = (state = '0', action) => {
             return state + action.number
         case ADD_DECIMAL:
             if (state.toString().length == 1) {
+                console.log("asd")
                 return state + '.'//if it's first number just add the decimal
             } else if (state[state.length - 1].indexOf('.') == -1) {
                 return state + '.'//if it's not the first number, check that the last character is not a decimal to avoid repetition
