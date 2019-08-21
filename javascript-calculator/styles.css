@@ -34,7 +34,7 @@ body {
     font-family: 'Graduate', cursive;
     font-size: 1.2em;
     text-align: right;
-    width:200px;
+    width:223px;
 }
 
 .display {
@@ -45,7 +45,7 @@ body {
 
 .keypad-container {
     display:flex;
-    width: 200px;   
+    width: 220px;   
 }
 
 .keypad > button {
@@ -77,13 +77,13 @@ body {
     justify-content:center;
 
     margin-right: 2px;
-    width: 170px;
+    width: 180px;
 }
 
 .numpad > button {
     background: #ff6768;
-    height: 50px;
-    width: 50px;
+    height: 55px;
+    width: 55px;
 }
 
 button[value="0"] {
@@ -102,8 +102,8 @@ button[value="0"] {
 .operators > button {
     background: #6b778d;
     font-weight: bold;
-    height: 34px;
-    width: 34px;
+    height: 45px;
+    width: 45px;
 }
 
 footer {
