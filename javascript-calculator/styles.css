@@ -19,7 +19,7 @@ body {
     display:flex;
     flex-direction:column;
     position: absolute;
-    top: 50%;
+    top: 42.5%;
     transform: translateY(-50%);
 }
 
@@ -54,7 +54,6 @@ body {
     font-size: 1em;
     font-family: 'Comfortaa', cursive;
     transition: 0.15s;
-    
 }
 
 .keypad > button:hover {

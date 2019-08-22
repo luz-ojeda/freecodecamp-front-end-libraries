@@ -97,11 +97,19 @@ class Presentational extends React.Component {
             this.props.addNewOperator(e.key)
         }
     }
+
+    componentDidMount(){
+        document.addEventListener("keydown", this.handleKeyDown, false);
+      }
+
+    componentWillUnmount(){
+        document.removeEventListener("keydown", this.handleKeyDown, false);
+    }
     
 
     render() {
         return (
-            <div className="container" onKeyDown={this.handleKeyDown}>
+            <div className="container">
                 <Display
                     input={this.props.input}
                     operation={this.props.operation}
