@@ -149,7 +149,7 @@ footer {
 }
 
 .fab:hover {
-    color: gray
+    color: rgb(78, 74, 74)
 }
 
 @media only screen and (min-width: 480px) {
