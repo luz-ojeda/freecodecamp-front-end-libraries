@@ -18,6 +18,7 @@ var contains_decimal = (/\./)
 
 //NUMPAD
 const NumPad = (props) => {
+
     function handleNumPadClick(e) {
         if (e.target.value == "." && !contains_decimal.test(props.input)) {
             props.addNewDecimal()
@@ -32,7 +33,7 @@ const NumPad = (props) => {
 
 
     return (
-        <div className="keypad numpad" onClick={handleNumPadClick} tabIndex="1">
+        <div className="keypad numpad" onClick={handleNumPadClick}>
             <button id="one" value="1">1</button>
             <button id="two" value="2">2</button>
             <button id="three" value="3">3</button>
@@ -280,7 +281,7 @@ const rootReducer = Redux.combineReducers({ input: inputReducer, operation: outp
 
 const store = Redux.createStore(rootReducer);
 
-//CONECTO REACT-REDUX
+//CONNECT TO REACT-REDUX
 const Provider = ReactRedux.Provider;
 
 //MAP STATE AND PROPS
