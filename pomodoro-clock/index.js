@@ -26,7 +26,7 @@ class App extends React.Component {
                 minutes: state.minutes - 1,
                 seconds: 59 //minute change
             }))
-        } else if (this.state.seconds == "00" && this.state.minutes < 10) {
+        } else if (this.state.seconds == "00" && this.state.minutes <= 10) {
             if (this.state.minutes == "00" && this.state.stage == 'Session') { //change to break
                 this.setState((state) => ({
                     minutes: "0" + state.breakLength,
