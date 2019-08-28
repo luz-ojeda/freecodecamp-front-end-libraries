@@ -35,3 +35,5 @@
 * CSS
 * Javascript
   * React
+  
+![Front End Libraries certificate image](https://res.cloudinary.com/dgfn49hld/image/upload/v1567008438/fcc-certificates/front-end_oeyxce.jpg)
