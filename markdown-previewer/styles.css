@@ -77,6 +77,10 @@ ul, ol {
     padding: 25px;
 }
 
+img {
+    width: 85%;
+}
+
 @media only screen and (min-width: 1000px){
 
     .app-container {
@@ -105,6 +109,10 @@ ul, ol {
 
     .previewer-container {
         overflow: scroll;
+    }
+
+    img {
+        width: auto;
     }
 
 }
