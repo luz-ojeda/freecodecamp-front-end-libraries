@@ -106,15 +106,53 @@ const quotes_list = [
     },
     {
         quote: "When you're at the end of your rope, tie a knot and hold on.",
-        source: "Theodore Roosevelt",
+        source: "- Theodore Roosevelt",
 
     },
     {
         quote: "Scientific truth is beyond loyalty and disloyalty.",
-        source: "Isaac Asimov, la Fundación",
+        source: "- Isaac Asimov, la Fundación",
         year: "1951"
 
     },
+    {
+        quote: "But man is not made for defeat. A man can be destroyed but not defeated.",
+        source: "- Ernest Hemingway",
+    },
+    {
+        quote: "You cannot shake hands with a clenched fist.",
+        source: "- Indira Gandhi"
+    },
+    {
+        quote: "There is nothing permanent except change.",
+        source: "- Heraclitus"
+    },
+
+    {
+        quote: "Do not mind anything that anyone tells you about anyone else. Judge everyone and everything for yourself.",
+        source: "- Henry James",
+
+    },
+    {
+        quote: "There is no charm equal to tenderness of heart.",
+        source: "- Jane Austen",
+
+    },
+    {
+        quote: "Learning never exhausts the mind.",
+        source: "- Leonardo da Vinci",
+
+    },
+    {
+        quote: "There is only one corner of the universe you can be certain of improving, and that's your own self.",
+        source: "- Aldous Huxley",
+
+    },
+    {
+        quote: "Tell me and I forget. Teach me and I remember. Involve me and I learn.",
+        source: "- Benjamin Franklin",
+    },
+    
 ];
 
 class QuoteBox extends React.Component {
