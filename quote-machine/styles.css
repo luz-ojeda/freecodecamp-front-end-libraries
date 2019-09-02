@@ -1,7 +1,7 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
 
 body {
@@ -81,11 +81,11 @@ body {
 }
 
 footer {
+    bottom:0;   
     font-size: 0.7em;
+    left:0;
     padding-bottom:5px;
     position:absolute;
-    left:0;
-    bottom:0;   
     right:0;
     text-align:center
 }
@@ -106,8 +106,8 @@ footer {
 
 @media only screen and (max-width: 400px){
     #quote-box {
-        width: 85%;
         padding: 15px 15px 7.5px 15px;
+        width: 85%;
     }
     #quote-box h1 {
         font-size: 1em;
@@ -130,10 +130,10 @@ footer {
 
 @media only screen and (max-height: 500px) {
     #quote-box {
+        margin-top: 20px;
         position:static;
         top:0;
         transform: none;
-        margin-top: 20px;
     }
 
     #quote-box h1 {

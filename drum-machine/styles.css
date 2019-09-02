@@ -16,7 +16,7 @@ body {
     justify-content: center;
     flex-direction: column;
     position:absolute;
-    top: 42.5%;
+    top: 45%;
     transform: translateY(-50%);
 }
 
@@ -92,7 +92,7 @@ input[type = "range"]:hover {
 }
 
 input[type = "range"]::-webkit-slider-thumb {
--webkit-appearance: none; /* Override default look */
+  -webkit-appearance: none; /* Override default look */
   appearance: none;
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
@@ -150,8 +150,8 @@ footer {
         font-size: 1.7em;
     }
     .drum-pad {
-        width: 80px;
         height: 80px;
+        width: 80px;
     }
     .footer-text {
         display: block;
