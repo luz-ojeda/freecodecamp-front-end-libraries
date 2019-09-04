@@ -14,7 +14,7 @@ const Display = (props) => {
     )
 }
 
-var contains_decimal = (/\./)
+const contains_decimal = (/\./)
 
 //NUMPAD
 const NumPad = (props) => {

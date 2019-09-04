@@ -1,4 +1,4 @@
-let display = document.getElementById("display")
+const display = document.getElementById("display")
 let volume = 50;
 let audioElement;
 
@@ -26,7 +26,7 @@ let removePlayEffect = function () {
     })
 }
 
-let buttons = document.getElementById("button-container")
+const buttons = document.getElementById("button-container")
 
 buttons.addEventListener('mousedown', playDrumPad)
 document.addEventListener('keydown', playDrumPad)
