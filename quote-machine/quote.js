@@ -175,7 +175,7 @@ class QuoteBox extends React.Component {
             <div id="quote-box">
 
                 <h1 id="text">
-                    <i class="fas fa-quote-left quote-icon"></i>{ quotes_list[this.state.quote_number]['quote']}
+                    <i className="fas fa-quote-left quote-icon"></i>{ quotes_list[this.state.quote_number]['quote']}
                 </h1>
 
                 <h3 id="author">
