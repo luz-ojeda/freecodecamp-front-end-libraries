@@ -1,13 +1,15 @@
 const display = document.getElementById("display")
+const drumpadKeys = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C']
 let volume = 50;
 let audioElement;
+
 
 let playDrumPad = function (event) {
     if (event.type ==
         'mousedown' && event.target.classList.contains('drum-pad')) {
 
         audioElement = event.target.querySelector("audio")
-    } else if (['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'].includes(event.key.toUpperCase())) {
+    } else if (drumpadKeys.includes(event.key.toUpperCase())) {
 
         audioElement = document.getElementById(event.key.toUpperCase())
         audioElement.parentNode.classList.add("drum-pad-active")
