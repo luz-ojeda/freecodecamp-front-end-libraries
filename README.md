@@ -19,7 +19,7 @@
 
 * HTML
 * CSS
-* Javascript
+* Javascript vanilla w/o frameworks
   * DOM manipulation
   
 ### 4. **[JavaScript Calculator](https://github.com/lezojeda/freecodecamp-front-end-libraries/tree/master/javascript-calculator)**
