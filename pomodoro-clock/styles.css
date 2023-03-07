@@ -8,6 +8,7 @@
   --main-bg-color: #222831;
   --primary: #00ADB5;
   --primary-dark: #003336;
+  --text: #EEEEEE;
 }
 
 body {
@@ -20,12 +21,14 @@ body {
 h1 {
     font-family: 'Fredoka One', sans-serif;
     margin: 10px 0 10px 0;
-    text-align: center; 
+    text-align: center;
+    color: var(--text);
+ 
 }
 
 h2,
 h3 {
-    color: #EEEEEE;
+    color: var(--text);
     font-family: 'Righteous', sans-serif;
     margin-bottom: 2px;
     text-align: center;
@@ -144,19 +147,19 @@ footer {
 }
 
 .footer-text {
+    color: var(--text);
     display:none;
 }
 
 .fab {
-    color: #191919;
+    color: var(--text);
 }
 
 .fab:hover {
-    color: gray
+    opacity: 0.7;
 }
 
 @media only screen and (min-width: 480px) {
-
     #root {
         max-width: 600px;
         width: 70%;
@@ -187,10 +190,10 @@ footer {
         display:block;
         font-size: 0.9em;
     }
+}
 
-    footer {
-        background: #ffd477;
-    }
+a {
+  color: var(--primary-dark);
 }
 
 @media only screen and (min-width: 1220px) {
