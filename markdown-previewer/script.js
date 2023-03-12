@@ -6,7 +6,7 @@ marked.setOptions({
 
 //#region placeholder
 
-var placeholder = `# Welcome to my React Markdown Previewer!
+const placeholder = `# Welcome to my React Markdown Previewer
 
 ## This is a sub-heading...
 ### And here's some other cool stuff:
@@ -66,9 +66,9 @@ class App extends React.Component {
                   <div class="app-container">
                         <div class="container editor-container">
                               <div class = "title">Editor</div>
-                              <div id = "editor"><textarea value={this.state.text} onChange={this.handleChange}></textarea></div>
+                              <textarea id="editor" value={this.state.text} onChange={this.handleChange}></textarea>
                         </div>
-                        <Previewer text={this.state.text}   />
+                        <Previewer text={this.state.text} />
                   </div >
             )
       }
@@ -78,16 +78,27 @@ class Previewer extends React.Component {
       constructor(props) {
             super(props);
       }
+  
+      componentDidMount() {
+        this.parseMarkdown(this.props.text)
+      }
+  
+      componentDidUpdate(prevProps) {
+        if (prevProps.text !== this.props.text) {
+          this.parseMarkdown(this.props.text)
+        }
+      }
 
-
+      parseMarkdown() {
+        document.getElementById('preview').innerHTML =
+          marked.parse(this.props.text);
+      }
 
       render() {
             return (
                   <div class="container previewer-container">
                         <div class = "title">Preview</div>
-                        <div id="preview"
-                              dangerouslySetInnerHTML={{ __html: marked(this.props.text, { sanitize: true }) }}
-                        />
+                        <div id="preview" />
                   </div>
 
             )
